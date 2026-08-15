@@ -250,10 +250,34 @@ export const courses = [
 
 export const projects = [
   {
+    title: "CV Screening Platform",
+    type: "Celfocus Internship Team Project",
+    category: "Recruitment Operations Dashboard",
+    featured: true,
+    technologies: ["React 19", "TypeScript", "Vite", "React Router", "Axios", "MSW", "Storybook"],
+    description:
+      "A production-style single-page application for reviewing internship candidates, inspecting AI-assisted evaluation reports, and configuring internship scoring criteria. Built collaboratively during the Celfocus internship and published as a team repository.",
+    evidence: "8 merged pull requests • 36 commits attributed in repository history",
+    implementation: [
+      "Structured the interface as an Atomic Design system—atoms, molecules, organisms, templates, and pages—with Storybook stories for reusable UI components.",
+      "Used protected React Router flows for login, candidate lists, candidate details, and settings, all mounted inside a reusable sidebar page template.",
+      "Centralized data access in typed Axios services with bearer-token interceptors for authentication, internships, candidates, and scoring-criteria endpoints.",
+      "Added a browser-side Mock Service Worker API with realistic authentication, filtering, sorting, error cases, and in-memory CRUD so the front end could be developed without a live back end.",
+    ],
+    contributions: [
+      "Authored the reusable InputField atom and the score-color utility used by evaluation components.",
+      "Built the shared DefaultTemplate layout and implemented the application's route tree.",
+      "Implemented candidate evaluation panels for score overview and breakdown, video assessment, strengths, weaknesses, and risk notes.",
+      "Contributed URL-backed candidate status filtering and updated the scoring-criteria API contract and TypeScript models.",
+    ],
+    repositoryUrl: "https://github.com/Ahmad-Helmy/intern-cv-screening",
+    contributionUrl:
+      "https://github.com/Ahmad-Helmy/intern-cv-screening/pulls?q=is%3Apr+author%3AMohamedAbdallah999",
+  },
+  {
     title: "Digital Diet and Fitness Assistant",
     type: "Graduation Project - BUE",
     category: "AI Mobile Application",
-    featured: true,
     technologies: ["Flutter", "Node.js", "Firebase", "Qdrant", "LangChain.js"],
     description:
       "AI-powered mobile application using Flutter and Node.js, based on RAG architecture with Firebase authentication, Qdrant vector database, LangChain.js orchestration, and LLM-based personalized diet and workout generation.",

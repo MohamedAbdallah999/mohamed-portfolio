@@ -524,16 +524,42 @@ function App() {
                     <span>{project.category}</span>
                   </div>
                   <h3>{project.title}</h3>
-                  <p>{project.description}</p>
+                  <p className="project-description">{project.description}</p>
+                  {project.evidence && <p className="project-evidence">Verified contribution: {project.evidence}</p>}
+                  {project.implementation && (
+                    <div className="project-detail-block">
+                      <h4>How it was implemented</h4>
+                      <ul>
+                        {project.implementation.map((detail) => (
+                          <li key={detail}>{detail}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {project.contributions && (
+                    <div className="project-detail-block project-contribution-block">
+                      <h4>My verified contributions</h4>
+                      <ul>
+                        {project.contributions.map((contribution) => (
+                          <li key={contribution}>{contribution}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   <div className="tag-row">
                     {project.technologies.map((tech) => (
                       <span key={tech}>{tech}</span>
                     ))}
                   </div>
                   <div className="project-links">
-                    <a href={links.github} target="_blank" rel="noreferrer">
-                      View GitHub Profile <ExternalLink size={15} />
+                    <a href={project.repositoryUrl ?? links.github} target="_blank" rel="noreferrer">
+                      {project.repositoryUrl ? "View team repository" : "View GitHub profile"} <ExternalLink size={15} />
                     </a>
+                    {project.contributionUrl && (
+                      <a href={project.contributionUrl} target="_blank" rel="noreferrer">
+                        View my pull requests <ExternalLink size={15} />
+                      </a>
+                    )}
                     <a href="#contact">Discuss project</a>
                   </div>
                 </motion.article>
