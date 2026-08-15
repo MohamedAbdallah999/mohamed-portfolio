@@ -21,7 +21,7 @@ import {
   X,
 } from "lucide-react";
 import type { FormEvent } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import {
   certificateGroups,
@@ -89,146 +89,18 @@ function HeroScene() {
   );
 }
 
-type SplashPoint = [number, number, number];
-
-const splashCubes: Array<{
-  color: string;
-  emissive: string;
-  path: SplashPoint[];
-  delay: number;
-  spin: SplashPoint;
-}> = [
-  {
-    color: "#2dd4bf",
-    emissive: "#0f766e",
-    path: [[-12, 7, -8], [-0.7, 0.5, 2.5], [2.8, -1.4, 1], [-4.4, 2.4, -0.6]],
-    delay: 0,
-    spin: [7.5, 10, 5],
-  },
-  {
-    color: "#60a5fa",
-    emissive: "#1d4ed8",
-    path: [[12, -7, -10], [0.8, -0.6, 2.8], [-3, 1.6, 1.2], [4.6, -2.5, -0.2]],
-    delay: 0.08,
-    spin: [9, -8, 6],
-  },
-  {
-    color: "#c4b5fd",
-    emissive: "#7c3aed",
-    path: [[-11, -9, -14], [0.5, 0.8, 3.4], [3.4, 2.2, 0.8], [-3.8, -3.1, -1.2]],
-    delay: 0.16,
-    spin: [-8, 9, -7],
-  },
-  {
-    color: "#f8fafc",
-    emissive: "#64748b",
-    path: [[13, 9, -16], [-0.5, -0.7, 3], [-3.1, -2, 1], [4.1, 3.2, -1.4]],
-    delay: 0.24,
-    spin: [-10, -7, 8],
-  },
-];
-
-function SplashCube({
-  color,
-  emissive,
-  path,
-  delay,
-  spin,
-  reducedMotion,
-}: (typeof splashCubes)[number] & { reducedMotion: boolean }) {
-  const mesh = useRef<THREE.Mesh>(null);
-  const curve = useMemo(
-    () => new THREE.CatmullRomCurve3(path.map((point) => new THREE.Vector3(...point)), false, "catmullrom", 0.22),
-    [path],
-  );
-
-  useFrame(({ clock }, delta) => {
-    if (!mesh.current) return;
-
-    if (reducedMotion) {
-      mesh.current.position.set(...path[path.length - 1]);
-      mesh.current.rotation.set(0.45, 0.65, 0.2);
-      mesh.current.scale.setScalar(0.78);
-      return;
-    }
-
-    const elapsed = Math.max(0, clock.elapsedTime - delay);
-    const progress = THREE.MathUtils.clamp(elapsed / 2.35, 0, 1);
-    const flight = 1 - Math.pow(1 - progress, 3);
-    const point = curve.getPointAt(flight);
-    const collisionPulse = Math.exp(-Math.pow((progress - 0.44) / 0.09, 2));
-    const entrance = THREE.MathUtils.smoothstep(progress, 0, 0.13);
-
-    mesh.current.position.copy(point);
-    mesh.current.rotation.x += delta * spin[0];
-    mesh.current.rotation.y += delta * spin[1];
-    mesh.current.rotation.z += delta * spin[2];
-    mesh.current.scale.setScalar(0.18 + entrance * 0.62 + collisionPulse * 0.62);
-  });
-
+function SplashCube({ tone, orbit }: { tone: "teal" | "blue" | "violet" | "silver"; orbit: number }) {
   return (
-    <mesh ref={mesh} position={path[0]}>
-      <boxGeometry args={[1.15, 1.15, 1.15]} />
-      <meshStandardMaterial
-        color={color}
-        emissive={emissive}
-        emissiveIntensity={0.24}
-        metalness={0.82}
-        roughness={0.16}
-      />
-    </mesh>
-  );
-}
-
-function SplashTorus({ reducedMotion }: { reducedMotion: boolean }) {
-  const torus = useRef<THREE.Mesh>(null);
-
-  useFrame(({ clock }, delta) => {
-    if (!torus.current) return;
-
-    if (reducedMotion) {
-      torus.current.rotation.set(0.72, 0.42, 0.18);
-      torus.current.scale.setScalar(0.92);
-      return;
-    }
-
-    const progress = THREE.MathUtils.clamp(clock.elapsedTime / 2.65, 0, 1);
-    const impact = Math.exp(-Math.pow((progress - 0.46) / 0.12, 2));
-    torus.current.rotation.x += delta * (2.5 + impact * 4.5);
-    torus.current.rotation.y += delta * (3.4 + impact * 5.5);
-    torus.current.rotation.z -= delta * 1.7;
-    torus.current.scale.setScalar(0.5 + THREE.MathUtils.smoothstep(progress, 0, 0.28) * 0.48 + impact * 0.22);
-  });
-
-  return (
-    <mesh ref={torus} position={[0, 0, -2.4]} rotation={[0.6, 0.35, 0]}>
-      <torusKnotGeometry args={[2.7, 0.19, 180, 24]} />
-      <meshStandardMaterial
-        color="#38dff5"
-        emissive="#0e7490"
-        emissiveIntensity={0.6}
-        metalness={0.72}
-        roughness={0.2}
-        transparent
-        opacity={0.42}
-        wireframe
-      />
-    </mesh>
-  );
-}
-
-function SplashScene({ reducedMotion }: { reducedMotion: boolean }) {
-  return (
-    <Canvas camera={{ position: [0, 0, 10], fov: 48 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
-      <ambientLight intensity={0.65} />
-      <pointLight position={[3, 5, 7]} intensity={2.2} color="#9ee7ff" />
-      <pointLight position={[-4, -3, 5]} intensity={1.8} color="#9d8cff" />
-      <Stars radius={55} depth={36} count={620} factor={3.2} saturation={0} fade speed={reducedMotion ? 0 : 1.5} />
-      <SplashTorus reducedMotion={reducedMotion} />
-      {splashCubes.map((cube) => (
-        <SplashCube key={cube.color} {...cube} reducedMotion={reducedMotion} />
-      ))}
-    </Canvas>
+    <div className={`splash-cube-orbiter splash-cube-${tone} splash-orbit-${orbit}`}>
+      <div className="splash-cube">
+        <span className="splash-cube-face splash-cube-front" />
+        <span className="splash-cube-face splash-cube-back" />
+        <span className="splash-cube-face splash-cube-left" />
+        <span className="splash-cube-face splash-cube-right" />
+        <span className="splash-cube-face splash-cube-top" />
+        <span className="splash-cube-face splash-cube-bottom" />
+      </div>
+    </div>
   );
 }
 
@@ -288,9 +160,9 @@ function App() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoaded(true), 2800);
+    const timer = window.setTimeout(() => setLoaded(true), reducedMotion ? 900 : 4600);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("light-mode", lightMode);
@@ -329,17 +201,15 @@ function App() {
       {!loaded && (
         <div className="preloader" role="status" aria-live="polite">
           <div className="splash-grid" aria-hidden="true" />
-          <div className="splash-streaks" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="splash-scene" aria-hidden="true">
-            <SplashScene reducedMotion={reducedMotion} />
+          <div className="splash-orbital-system" aria-hidden="true">
+            <span className="splash-wire-orbit splash-wire-orbit-wide" />
+            <span className="splash-wire-orbit splash-wire-orbit-tall" />
+            <SplashCube tone="teal" orbit={1} />
+            <SplashCube tone="blue" orbit={2} />
+            <SplashCube tone="violet" orbit={3} />
+            <SplashCube tone="silver" orbit={4} />
           </div>
           <div className="splash-name-lockup">
-            <span className="splash-sequence">Orbital collision // portfolio</span>
             <strong className="splash-name" aria-label="Mohamed Abdallah Mohamed">
               <span>Mohamed</span>
               <span>Abdallah</span>
@@ -350,7 +220,6 @@ function App() {
           <div className="splash-progress" aria-label="Loading portfolio">
             <div className="splash-progress-copy">
               <span>Initializing neural workspace</span>
-              <span>02.8s</span>
             </div>
             <div className="splash-progress-rail" aria-hidden="true">
               <span className="splash-progress-fill" />

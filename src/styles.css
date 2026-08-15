@@ -68,17 +68,17 @@ img {
 }
 
 .preloader {
+  --cube-size: clamp(46px, 5vw, 64px);
   position: fixed;
   inset: 0;
   z-index: 100;
   display: grid;
-  align-items: center;
-  justify-content: center;
+  place-items: center;
   padding: clamp(1rem, 3vw, 2.5rem);
   background:
-    radial-gradient(circle at 50% 48%, rgba(56, 223, 245, 0.14), transparent 28rem),
-    radial-gradient(circle at 34% 62%, rgba(157, 140, 255, 0.1), transparent 30rem),
-    linear-gradient(145deg, #020617, #05070d 56%, #0d111a);
+    radial-gradient(circle at 50% 48%, rgba(56, 223, 245, 0.12), transparent 25rem),
+    radial-gradient(circle at 34% 62%, rgba(157, 140, 255, 0.06), transparent 32rem),
+    linear-gradient(145deg, #020617, #05070d 58%, #080d17);
   color: #f8fafc;
   overflow: hidden;
   isolation: isolate;
@@ -89,34 +89,221 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 6;
+  z-index: 5;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, transparent 42%, rgba(2, 6, 23, 0.22) 72%, rgba(2, 6, 23, 0.78) 100%),
-    linear-gradient(110deg, transparent 0 47%, rgba(56, 223, 245, 0.08) 49%, transparent 51% 100%);
-  animation: splashPulse 1.35s ease-in-out infinite alternate;
+    radial-gradient(circle at center, transparent 36%, rgba(2, 6, 23, 0.18) 68%, rgba(2, 6, 23, 0.82) 100%),
+    linear-gradient(110deg, transparent 0 48%, rgba(56, 223, 245, 0.035) 50%, transparent 52% 100%);
+  animation: splashPulse 2.6s ease-in-out infinite alternate;
+}
+
+.preloader::after {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(216, 227, 245, 0.76) 0.7px, transparent 0.8px);
+  background-size: 48px 48px;
+  opacity: 0.16;
+  animation: splashStarDrift 12s linear infinite;
 }
 
 .splash-grid {
   position: absolute;
-  inset: -18%;
-  z-index: -1;
+  inset: -10%;
+  z-index: 0;
   background-image:
-    linear-gradient(rgba(56, 223, 245, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 223, 245, 0.055) 1px, transparent 1px);
-  background-size: clamp(64px, 8vw, 108px) clamp(64px, 8vw, 108px);
-  mask-image: radial-gradient(circle, black 0 30%, transparent 72%);
-  transform: rotateX(64deg) translateY(18%) scale(1.4);
+    linear-gradient(rgba(56, 223, 245, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 223, 245, 0.045) 1px, transparent 1px);
+  background-size: clamp(72px, 8vw, 100px) clamp(72px, 8vw, 100px);
+  mask-image: radial-gradient(circle, black 0 35%, transparent 78%);
+  opacity: 0.65;
+  transform: translate3d(0, 0, 0) scale(1.08);
   transform-origin: center;
-  animation: splashGridRush 2.8s cubic-bezier(0.22, 0.75, 0.24, 1) both;
+  animation: splashGridDrift 8s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
-.splash-scene {
+.splash-orbital-system {
   position: absolute;
-  inset: -5%;
-  z-index: 1;
+  inset: 0;
+  z-index: 2;
   pointer-events: none;
-  animation: splashSceneImpact 2.8s cubic-bezier(0.2, 0.78, 0.22, 1) both;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  animation: splashOrbitalReveal 4.38s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.splash-wire-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(56, 223, 245, 0.24);
+  border-radius: 50%;
+  opacity: 0;
+  filter: drop-shadow(0 0 10px rgba(56, 223, 245, 0.18));
+  will-change: transform, opacity;
+}
+
+.splash-wire-orbit-wide {
+  width: min(680px, 78vw);
+  height: min(370px, 44vw);
+  border-style: dashed;
+  animation: splashWideOrbit 9s linear infinite, splashOrbitFade 1.5s ease 0.25s forwards;
+}
+
+.splash-wire-orbit-tall {
+  width: min(310px, 38vw);
+  height: min(610px, 74vh);
+  border-color: rgba(157, 140, 255, 0.14);
+  animation: splashTallOrbit 11s linear infinite reverse, splashOrbitFade 1.7s ease 0.35s forwards;
+}
+
+.splash-cube-orbiter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--cube-size);
+  height: var(--cube-size);
+  margin: calc(var(--cube-size) / -2) 0 0 calc(var(--cube-size) / -2);
+  opacity: 0;
+  transform-style: preserve-3d;
+  animation: splashCubeOrbit 4.1s cubic-bezier(0.4, 0, 0.2, 1) both;
+  will-change: transform, opacity;
+}
+
+.splash-cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: splashCubeSpin 3.6s linear infinite;
+  will-change: transform;
+}
+
+.splash-cube-face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(148, 163, 184, 0.05));
+  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.06), 0 0 18px rgba(56, 223, 245, 0.08);
+  backface-visibility: visible;
+}
+
+.splash-cube-front {
+  transform: rotateY(0deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.splash-cube-back {
+  transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.splash-cube-right {
+  transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.splash-cube-left {
+  transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.splash-cube-top {
+  transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.splash-cube-bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.splash-cube-teal .splash-cube-face {
+  border-color: rgba(45, 212, 191, 0.5);
+  background: linear-gradient(145deg, rgba(94, 234, 212, 0.3), rgba(15, 118, 110, 0.08));
+  box-shadow: inset 0 0 20px rgba(45, 212, 191, 0.1), 0 0 24px rgba(45, 212, 191, 0.18);
+}
+
+.splash-cube-blue .splash-cube-face {
+  border-color: rgba(96, 165, 250, 0.5);
+  background: linear-gradient(145deg, rgba(147, 197, 253, 0.3), rgba(29, 78, 216, 0.08));
+  box-shadow: inset 0 0 20px rgba(96, 165, 250, 0.1), 0 0 24px rgba(96, 165, 250, 0.18);
+}
+
+.splash-cube-violet .splash-cube-face {
+  border-color: rgba(196, 181, 253, 0.5);
+  background: linear-gradient(145deg, rgba(221, 214, 254, 0.3), rgba(124, 58, 237, 0.08));
+  box-shadow: inset 0 0 20px rgba(196, 181, 253, 0.1), 0 0 24px rgba(157, 140, 255, 0.2);
+}
+
+.splash-cube-silver .splash-cube-face {
+  border-color: rgba(248, 250, 252, 0.48);
+  background: linear-gradient(145deg, rgba(248, 250, 252, 0.32), rgba(100, 116, 139, 0.08));
+  box-shadow: inset 0 0 20px rgba(248, 250, 252, 0.1), 0 0 24px rgba(226, 232, 240, 0.16);
+}
+
+.splash-orbit-1 {
+  --start-x: -56vw;
+  --start-y: -42vh;
+  --approach-x: -92px;
+  --approach-y: -58px;
+  --impact-x: -10px;
+  --impact-y: -6px;
+  --arc-x: 94px;
+  --arc-y: -48px;
+  --arc-two-x: -72px;
+  --arc-two-y: 42px;
+  --settle-x: -126px;
+  --settle-y: -82px;
+}
+
+.splash-orbit-2 {
+  --start-x: 56vw;
+  --start-y: 42vh;
+  --approach-x: 96px;
+  --approach-y: 62px;
+  --impact-x: 12px;
+  --impact-y: 8px;
+  --arc-x: -98px;
+  --arc-y: 50px;
+  --arc-two-x: 70px;
+  --arc-two-y: -44px;
+  --settle-x: 132px;
+  --settle-y: 86px;
+  animation-delay: 0.06s;
+}
+
+.splash-orbit-2 .splash-cube,
+.splash-orbit-4 .splash-cube {
+  animation-direction: reverse;
+}
+
+.splash-orbit-3 {
+  --start-x: -52vw;
+  --start-y: 48vh;
+  --approach-x: -76px;
+  --approach-y: 76px;
+  --impact-x: -8px;
+  --impact-y: 12px;
+  --arc-x: 78px;
+  --arc-y: 68px;
+  --arc-two-x: -58px;
+  --arc-two-y: -60px;
+  --settle-x: -108px;
+  --settle-y: 104px;
+  animation-delay: 0.12s;
+}
+
+.splash-orbit-4 {
+  --start-x: 54vw;
+  --start-y: -46vh;
+  --approach-x: 80px;
+  --approach-y: -78px;
+  --impact-x: 10px;
+  --impact-y: -12px;
+  --arc-x: -82px;
+  --arc-y: -66px;
+  --arc-two-x: 58px;
+  --arc-two-y: 58px;
+  --settle-x: 112px;
+  --settle-y: -108px;
+  animation-delay: 0.18s;
 }
 
 .splash-name-lockup {
@@ -128,10 +315,9 @@ img {
   text-align: center;
   transform-style: preserve-3d;
   pointer-events: none;
-  animation: splashNameCollision 2.8s cubic-bezier(0.18, 0.82, 0.18, 1) both;
+  animation: splashNameReveal 4.32s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
-.splash-sequence,
 .splash-discipline,
 .splash-progress-copy {
   color: var(--cyan);
@@ -141,20 +327,15 @@ img {
   text-transform: uppercase;
 }
 
-.splash-sequence {
-  margin-bottom: clamp(1rem, 2.4vw, 1.8rem);
-  opacity: 0.72;
-}
-
 .splash-name {
   display: grid;
   justify-items: center;
-  font-size: clamp(3.25rem, 8vw, 7.6rem);
-  font-weight: 950;
-  line-height: 0.78;
-  letter-spacing: -0.065em;
+  font-size: clamp(3.15rem, 8vw, 6.8rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
   text-transform: uppercase;
-  filter: drop-shadow(0 0 30px rgba(56, 223, 245, 0.22));
+  filter: drop-shadow(0 0 32px rgba(56, 223, 245, 0.18));
 }
 
 .splash-name span {
@@ -172,56 +353,9 @@ img {
 }
 
 .splash-discipline {
-  margin-top: clamp(1.25rem, 3vw, 2.1rem);
+  margin-top: clamp(1.1rem, 2.6vw, 1.8rem);
   letter-spacing: 0.42em;
   opacity: 0.84;
-}
-
-.splash-streaks {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.splash-streaks span {
-  position: absolute;
-  width: min(44vw, 600px);
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(56, 223, 245, 0.9), transparent);
-  box-shadow: 0 0 18px rgba(56, 223, 245, 0.72);
-  opacity: 0;
-  transform-origin: center;
-  animation: splashStreak 1.15s cubic-bezier(0.16, 0.8, 0.2, 1) both;
-}
-
-.splash-streaks span:nth-child(1) {
-  top: 17%;
-  left: -16%;
-  transform: rotate(24deg);
-  animation-delay: 0.05s;
-}
-
-.splash-streaks span:nth-child(2) {
-  right: -18%;
-  bottom: 18%;
-  transform: rotate(28deg);
-  animation-delay: 0.16s;
-}
-
-.splash-streaks span:nth-child(3) {
-  left: -13%;
-  bottom: 22%;
-  transform: rotate(-25deg);
-  animation-delay: 0.34s;
-}
-
-.splash-streaks span:nth-child(4) {
-  top: 22%;
-  right: -16%;
-  transform: rotate(-30deg);
-  animation-delay: 0.48s;
 }
 
 .splash-progress {
@@ -234,9 +368,8 @@ img {
 }
 
 .splash-progress-copy {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  display: grid;
+  place-items: center;
   margin-bottom: 0.65rem;
   color: #a7b4c8;
   font-size: 0.62rem;
@@ -255,9 +388,9 @@ img {
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--cyan), var(--blue), var(--violet));
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
   box-shadow: 0 0 18px rgba(56, 223, 245, 0.84);
-  animation: splashProgress 2.72s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: splashProgress 4.34s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
 .splash-exit {
@@ -267,7 +400,7 @@ img {
   background: linear-gradient(135deg, #8ef2ff, var(--cyan) 40%, var(--blue));
   box-shadow: 0 0 90px rgba(56, 223, 245, 0.78);
   transform: translateY(115%) skewY(-6deg);
-  animation: splashExit 0.28s cubic-bezier(0.7, 0, 0.3, 1) 2.52s forwards;
+  animation: splashExit 0.38s cubic-bezier(0.7, 0, 0.3, 1) 4.22s forwards;
 }
 
 .progress-bar {
@@ -1064,127 +1197,145 @@ h1 {
 
 @keyframes splashPulse {
   from {
-    opacity: 0.72;
-    filter: saturate(0.88);
+    opacity: 0.78;
+    filter: saturate(0.94);
   }
   to {
     opacity: 1;
-    filter: saturate(1.16);
+    filter: saturate(1.08);
   }
 }
 
-@keyframes splashGridRush {
+@keyframes splashStarDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(24px, 24px, 0);
+  }
+}
+
+@keyframes splashGridDrift {
   0% {
     opacity: 0;
-    transform: rotateX(66deg) translateY(25%) scale(0.5);
-  }
-  32% {
-    opacity: 0.85;
-  }
-  72% {
-    opacity: 0.48;
-  }
-  100% {
-    opacity: 0.16;
-    transform: rotateX(58deg) translateY(-5%) scale(2.1);
-  }
-}
-
-@keyframes splashSceneImpact {
-  0% {
-    opacity: 0;
-    transform: scale(0.66) translateZ(-220px);
-    filter: blur(12px) saturate(0.75);
-  }
-  16% {
-    opacity: 1;
-    filter: blur(0) saturate(1.18);
-  }
-  46% {
-    transform: scale(1.08) translateZ(32px);
-  }
-  70% {
-    transform: scale(0.98) translateZ(0);
-  }
-  100% {
-    opacity: 0.92;
-    transform: scale(1) translateZ(0);
-    filter: blur(0) saturate(1);
-  }
-}
-
-@keyframes splashNameCollision {
-  0%,
-  13% {
-    opacity: 0;
-    transform: scale(0.62) translateZ(-180px);
-    filter: blur(18px);
-  }
-  30% {
-    opacity: 1;
-    transform: scale(1.08) translateZ(40px);
-    filter: blur(0);
-  }
-  42% {
-    transform: scale(0.97) translateZ(0);
-  }
-  55%,
-  92% {
-    opacity: 1;
-    transform: scale(1) translateZ(0);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0.78;
-    transform: scale(1.04) translateZ(24px);
-    filter: blur(1px);
-  }
-}
-
-@keyframes splashNameCollisionMobile {
-  0%,
-  13% {
-    opacity: 0;
-    transform: scale(0.7) translateZ(-120px);
-    filter: blur(14px);
-  }
-  30% {
-    opacity: 1;
-    transform: scale(1.015) translateZ(18px);
-    filter: blur(0);
-  }
-  42% {
-    transform: scale(0.985) translateZ(0);
-  }
-  55%,
-  92% {
-    opacity: 1;
-    transform: scale(1) translateZ(0);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0.82;
-    transform: scale(1.01) translateZ(8px);
-    filter: blur(0.5px);
-  }
-}
-
-@keyframes splashStreak {
-  0% {
-    opacity: 0;
-    translate: -55vw -20vh;
-    scale: 0.28 1;
+    transform: translate3d(0, 16px, 0) scale(1.03);
   }
   24% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 0.72;
+    opacity: 0.65;
   }
   100% {
+    opacity: 0.4;
+    transform: translate3d(-18px, -14px, 0) scale(1.12);
+  }
+}
+
+@keyframes splashOrbitalReveal {
+  0% {
     opacity: 0;
-    translate: 125vw 72vh;
-    scale: 1.35 1;
+    transform: scale(0.88) translateZ(-120px);
+  }
+  18% {
+    opacity: 1;
+  }
+  48% {
+    transform: scale(1.025) translateZ(20px);
+  }
+  68% {
+    transform: scale(0.995) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes splashOrbitFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.42;
+  }
+}
+
+@keyframes splashWideOrbit {
+  from {
+    transform: translate(-50%, -50%) rotateX(66deg) rotateZ(-14deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(66deg) rotateZ(346deg);
+  }
+}
+
+@keyframes splashTallOrbit {
+  from {
+    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg) rotateZ(18deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg) rotateZ(378deg);
+  }
+}
+
+@keyframes splashCubeOrbit {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--start-x), var(--start-y), -420px) scale(0.32);
+  }
+  12% {
+    opacity: 0.88;
+  }
+  30% {
+    opacity: 0.92;
+    transform: translate3d(var(--approach-x), var(--approach-y), 95px) scale(0.92);
+  }
+  48% {
+    opacity: 1;
+    transform: translate3d(var(--impact-x), var(--impact-y), 220px) scale(1.16);
+  }
+  64% {
+    opacity: 0.94;
+    transform: translate3d(var(--arc-x), var(--arc-y), 70px) scale(0.86);
+  }
+  82% {
+    transform: translate3d(var(--arc-two-x), var(--arc-two-y), 35px) scale(0.78);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translate3d(var(--settle-x), var(--settle-y), 0) scale(0.72);
+  }
+}
+
+@keyframes splashCubeSpin {
+  from {
+    transform: rotateX(-22deg) rotateY(0deg) rotateZ(12deg);
+  }
+  to {
+    transform: rotateX(338deg) rotateY(360deg) rotateZ(192deg);
+  }
+}
+
+@keyframes splashNameReveal {
+  0%,
+  8% {
+    opacity: 0;
+    transform: scale(0.86) translateZ(-80px);
+    filter: blur(9px);
+  }
+  27% {
+    opacity: 1;
+    transform: scale(1.018) translateZ(12px);
+    filter: blur(0);
+  }
+  36%,
+  94% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0.96;
+    transform: scale(1.008) translateZ(4px);
+    filter: blur(0);
   }
 }
 
@@ -1328,18 +1479,13 @@ h1 {
 }
 
 @media (max-width: 380px), (max-height: 640px) {
-  .splash-name-lockup {
-    animation-name: splashNameCollisionMobile;
+  .preloader {
+    --cube-size: 38px;
   }
 
   .splash-name {
     font-size: clamp(2.45rem, 12.8vw, 3.8rem);
-    line-height: 0.82;
-  }
-
-  .splash-sequence {
-    margin-bottom: 0.8rem;
-    font-size: 0.52rem;
+    line-height: 0.9;
   }
 
   .splash-discipline {
@@ -1355,16 +1501,45 @@ h1 {
   .splash-progress-copy {
     font-size: 0.53rem;
   }
+
+  .splash-wire-orbit-wide {
+    width: 94vw;
+    height: 56vw;
+  }
+
+  .splash-wire-orbit-tall {
+    width: 48vw;
+    height: 62vh;
+  }
+
+  .splash-orbit-1 {
+    --settle-x: -70px;
+    --settle-y: -62px;
+  }
+
+  .splash-orbit-2 {
+    --settle-x: 72px;
+    --settle-y: 64px;
+  }
+
+  .splash-orbit-3 {
+    --settle-x: -68px;
+    --settle-y: 76px;
+  }
+
+  .splash-orbit-4 {
+    --settle-x: 70px;
+    --settle-y: -76px;
+  }
 }
 
 @media (min-width: 381px) and (max-width: 760px) and (min-height: 641px) {
-  .splash-scene {
-    inset: -12%;
+  .preloader {
+    --cube-size: 44px;
   }
 
   .splash-name-lockup {
     width: min(560px, calc(100vw - 1.2rem));
-    animation-name: splashNameCollisionMobile;
   }
 
   .splash-name {
@@ -1375,21 +1550,50 @@ h1 {
     letter-spacing: -0.075em;
   }
 
-  .splash-sequence {
-    letter-spacing: 0.16em;
-  }
-
   .splash-discipline {
     letter-spacing: 0.3em;
+  }
+
+  .splash-wire-orbit-wide {
+    width: 90vw;
+    height: 52vw;
+  }
+
+  .splash-wire-orbit-tall {
+    width: 44vw;
+    height: 66vh;
+  }
+
+  .splash-orbit-1 {
+    --settle-x: -88px;
+    --settle-y: -72px;
+  }
+
+  .splash-orbit-2 {
+    --settle-x: 90px;
+    --settle-y: 74px;
+  }
+
+  .splash-orbit-3 {
+    --settle-x: -84px;
+    --settle-y: 90px;
+  }
+
+  .splash-orbit-4 {
+    --settle-x: 86px;
+    --settle-y: -92px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .preloader::before,
+  .preloader::after,
   .splash-grid,
-  .splash-scene,
+  .splash-orbital-system,
+  .splash-wire-orbit,
+  .splash-cube-orbiter,
+  .splash-cube,
   .splash-name-lockup,
-  .splash-streaks span,
   .splash-progress-fill,
   .splash-exit {
     animation: none !important;
@@ -1401,9 +1605,27 @@ h1 {
     filter: none;
   }
 
-  .splash-streaks,
   .splash-exit {
     display: none;
+  }
+
+  .splash-wire-orbit-wide {
+    opacity: 0.22;
+    transform: translate(-50%, -50%) rotateX(66deg) rotateZ(-14deg);
+  }
+
+  .splash-wire-orbit-tall {
+    opacity: 0.12;
+    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg) rotateZ(18deg);
+  }
+
+  .splash-cube-orbiter {
+    opacity: 0.72;
+    transform: translate3d(var(--settle-x), var(--settle-y), 0) scale(0.68);
+  }
+
+  .splash-cube {
+    transform: rotateX(-22deg) rotateY(36deg) rotateZ(12deg);
   }
 
   .splash-progress-fill {
