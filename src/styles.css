@@ -662,6 +662,10 @@ h1 {
   gap: 1rem;
 }
 
+.experience-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .glass-card,
 .document-card,
 .project-card {
@@ -683,6 +687,19 @@ h1 {
 .experience-card small {
   color: var(--muted);
   margin-top: 1rem;
+}
+
+.experience-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.experience-list li::marker {
+  color: var(--cyan);
 }
 
 .project-grid {

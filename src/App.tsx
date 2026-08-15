@@ -230,7 +230,7 @@ function App() {
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
               <span className="status-pill">Available for software engineering opportunities</span>
               <h1>{person.name}</h1>
-              <p className="hero-title">Software Engineering Fresh Graduate / Back-End Developer / Full-Stack Developer</p>
+              <p className="hero-title">Software Engineering Graduate / Back-End Developer / Full-Stack &amp; AI Developer</p>
               <p className="hero-summary">{person.summary}</p>
               <div className="hero-actions">
                 <a className="primary-action" href="#projects">
@@ -266,7 +266,7 @@ function App() {
             </div>
             <div className="profile-meta">
               <span><MapPin size={16} /> {person.location}</span>
-              <span><GraduationCap size={16} /> BUE / London South Bank University</span>
+              <span><GraduationCap size={16} /> Distinction (Honors) | GPA 3.7</span>
               <span><BriefcaseBusiness size={16} /> Military status: Exempted</span>
             </div>
           </motion.div>
@@ -276,18 +276,17 @@ function App() {
         </section>
 
         <div className="content-shell">
-          <Section id="about" eyebrow="Profile" title="Back-end depth, full-stack delivery, and AI product thinking.">
+          <Section id="about" eyebrow="Profile" title="Full-stack delivery, software quality, and agentic AI.">
             <div className="about-grid">
               <p>
-                Mohamed Abdallah Mohamed is a Software Engineering fresh graduate from The British University in Egypt / London
-                South Bank University with a current GPA of 3.7. Based in New Cairo and exempted from military service, he brings a
-                practical engineering profile shaped by academic software systems, enterprise back-end exposure at CDS, CIB digital
-                readiness training, Mazaya e-commerce experience, and intensive React training through ITI.
+                Mohamed Abdallah Mohamed is a Software Engineering graduate from The British University in Egypt / London South Bank
+                University, graduating with Distinction (Honors) and a GPA of 3.7. Based in New Cairo and exempted from military
+                service, he brings practical experience from Celfocus, Connect Digital Solutions, CIB, and Mazaya Group.
               </p>
               <p>
-                His strongest focus areas are Java and Spring Boot back-end development, full-stack web applications, Flutter and
-                Firebase mobile applications, RAG-based systems, and educational AI tools that combine perception, retrieval, and
-                adaptive learning workflows.
+                His Celfocus internship expanded that foundation across Spring and React feature development, QA and system testing,
+                DevOps, prompt engineering, MCP servers, and agentic AI workflows. His project work also spans Flutter and Firebase
+                applications, RAG systems, vector retrieval, and adaptive educational AI.
               </p>
               <div className="highlight-grid">
                 {highlights.map((item) => (
@@ -324,7 +323,11 @@ function App() {
                   </div>
                   <h3>{item.role}</h3>
                   <strong>{item.company}</strong>
-                  <p>{item.description}</p>
+                  <ul className="experience-list">
+                    {item.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
                   <small><MapPin size={14} /> {item.location}</small>
                 </article>
               ))}
@@ -463,7 +466,7 @@ function App() {
           <Section id="contact" eyebrow="Contact" title="Recruiter-friendly contact">
             <div className="contact-grid">
               <div className="contact-panel">
-                <h3>Open to software engineering, back-end, full-stack, mobile, and AI application opportunities.</h3>
+                <h3>Open to software engineering, back-end, full-stack, QA, DevOps, and AI application opportunities.</h3>
                 <a href={links.email}><Mail size={18} /> {person.email}</a>
                 <a href={links.phone}><Phone size={18} /> {person.phone}</a>
                 <a href={links.linkedin} target="_blank" rel="noreferrer"><Linkedin size={18} /> LinkedIn profile</a>
@@ -494,7 +497,7 @@ function App() {
 
       <footer className="footer">
         <strong>{person.name}</strong>
-        <span>Software Engineering Fresh Graduate | Back-End Developer | Full-Stack Developer</span>
+        <span>Software Engineering Graduate | Back-End Developer | Full-Stack &amp; AI Developer</span>
         <div>
           <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>
           <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>

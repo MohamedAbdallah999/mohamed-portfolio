@@ -30,13 +30,13 @@ export const person = {
   email: "mohamed1392003@gmail.com",
   phone: "+20 115 707 0004",
   titles: [
-    "Software Engineering Fresh Graduate",
+    "Software Engineering Graduate",
     "Back-End Developer",
     "Full-Stack Developer",
-    "AI-Powered Mobile Applications Developer",
+    "AI and Agentic Systems Developer",
   ],
   summary:
-    "Software Engineering fresh graduate from The British University in Egypt / London South Bank University with a GPA of 3.7. Based in New Cairo, Egypt. Military status: Exempted. Experienced in back-end development, full-stack web projects, AI-powered mobile applications, RAG-based systems, and AI-supported educational tools using Java, Spring Boot, Flutter, Firebase, Node.js, MongoDB, Qdrant, and LangChain.js.",
+    "Software Engineering graduate from The British University in Egypt / London South Bank University, graduating with Distinction (Honors) and a GPA of 3.7. Based in New Cairo, Egypt. Experienced across the software delivery lifecycle, from Spring and React development to QA, DevOps, AI-powered applications, RAG systems, prompt engineering, and MCP servers.",
 };
 
 export const navItems = [
@@ -162,7 +162,7 @@ export const education = [
     degree: "Dual Bachelor's Degree in Information and Computer Science, Software Engineering",
     location: "Cairo, Egypt",
     date: "2022 - 2026",
-    details: "Current GPA: 3.7",
+    details: "GPA: 3.7 | Distinction (Honors)",
   },
   {
     institution: "Al Farouk Islamic Language School",
@@ -175,13 +175,26 @@ export const education = [
 
 export const experience = [
   {
+    role: "Software Engineer Intern",
+    company: "Celfocus",
+    location: "Cairo, Egypt",
+    type: "Hybrid",
+    date: "July 2026 - August 2026",
+    highlights: [
+      "Rotated across front-end, back-end, QA and system testing, agentic AI, and DevOps on live company projects, gaining hands-on exposure to the full software delivery lifecycle.",
+      "Built and tested features using Spring and React, strengthening full-stack development, testing, and deployment skills.",
+      "Built and used Model Context Protocol (MCP) servers, applied prompt engineering techniques, and developed agentic AI workflows.",
+    ],
+  },
+  {
     role: "Back-End Developer Intern",
     company: "Connect Digital Solutions (CDS)",
     location: "Cairo, Egypt",
     type: "Hybrid",
     date: "July 2025 - September 2025",
-    description:
+    highlights: [
       "Gained practical back-end development experience with Java, OOP, data structures, Spring Boot, Spring Data JPA, Spring Security, and microservices.",
+    ],
   },
   {
     role: "CIB Online Internship",
@@ -189,8 +202,10 @@ export const experience = [
     location: "Cairo, Egypt",
     type: "Online",
     date: "July 2024 - August 2024",
-    description:
-      "Completed cybersecurity and workplace readiness training covering common cyber threats, protection strategies, digital awareness, financial literacy, entrepreneurial skills, digital transformation, data literacy, and interpersonal skills.",
+    highlights: [
+      "Completed cybersecurity training covering common cyber threats, protection strategies, and digital awareness.",
+      "Earned certificates in future workplace skills, human-centric interpersonal skills, financial literacy and entrepreneurship, digital transformation, and data literacy.",
+    ],
   },
   {
     role: "E-commerce Intern",
@@ -198,8 +213,9 @@ export const experience = [
     location: "Cairo, Egypt",
     type: "On-site, Marketing Committee",
     date: "August 2023 - September 2023",
-    description:
+    highlights: [
       "Supported website-related and marketing activities while building practical experience in Excel, Word, data entry, and data analysis.",
+    ],
   },
 ];
 
@@ -315,6 +331,8 @@ export const skillCategories = [
       "OpenCV",
       "MediaPipe",
       "FAISS",
+      "Git",
+      "Docker",
     ],
   },
   {
@@ -331,17 +349,20 @@ export const skillCategories = [
       "Web Development",
       "Game Development",
       "Multithreading",
+      "Software Quality Assurance",
+      "DevOps",
+      "Testing",
     ],
   },
   {
     title: "AI",
     icon: Sparkles,
-    skills: ["CNNs", "NLP", "Model Training", "RAG", "Vector Databases", "AI Agents"],
+    skills: ["CNNs", "NLP", "Model Training", "RAG", "Prompt Engineering", "MCPs"],
   },
   {
     title: "Tools",
     icon: ShieldCheck,
-    skills: ["Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint", "Adobe Photoshop", "VS Code", "GitHub"],
+    skills: ["Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint", "Adobe Photoshop", "VS Code", "IntelliJ"],
   },
   {
     title: "Languages",
@@ -351,22 +372,22 @@ export const skillCategories = [
 ];
 
 export const highlights: Array<{ label: string; value: string; icon: LucideIcon }> = [
-  { label: "Current GPA", value: "3.7", icon: GraduationCap },
-  { label: "Internships", value: "CDS, CIB, Mazaya", icon: BriefcaseBusiness },
-  { label: "Core Stack", value: "Java, Spring Boot, React, Node.js", icon: Database },
+  { label: "Graduation Result", value: "Distinction (Honors)", icon: GraduationCap },
+  { label: "Internships", value: "Celfocus, CDS, CIB, Mazaya", icon: BriefcaseBusiness },
+  { label: "Core Stack", value: "Spring, React, Flutter, Node.js", icon: Database },
   { label: "Documents", value: "CV, Cover Letter, Certificates", icon: Award },
 ];
 
 export const repoCards = [
   {
-    title: "AI and RAG Applications",
-    description: "Graduation and senior-year systems using vector databases, orchestration, and adaptive AI interfaces.",
-    stack: "Flutter, Node.js, Qdrant, LangChain.js, Python",
+    title: "AI and Agentic Systems",
+    description: "Applications using RAG, vector retrieval, agent orchestration, prompt engineering, MCP servers, and adaptive AI interfaces.",
+    stack: "Node.js, Python, Qdrant, LangChain.js, FAISS",
   },
   {
-    title: "Back-End and Full-Stack Projects",
-    description: "Software projects focused on API design, database modeling, authentication, and maintainable architecture.",
-    stack: "Java, Spring Boot, MongoDB, React, Tailwind CSS",
+    title: "Full-Stack Delivery",
+    description: "Software work spanning feature development, API design, database modeling, testing, deployment, and quality assurance.",
+    stack: "Java, Spring, React, MongoDB, Docker",
   },
   {
     title: "Academic Engineering Systems",
