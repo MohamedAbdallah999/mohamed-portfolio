@@ -553,7 +553,7 @@ function App() {
                   </div>
                   <div className="project-links">
                     <a href={project.repositoryUrl ?? links.github} target="_blank" rel="noreferrer">
-                      {project.repositoryUrl ? "View team repository" : "View GitHub profile"} <ExternalLink size={15} />
+                      {project.repositoryLabel ?? (project.repositoryUrl ? "View project repository" : "View GitHub profile")} <ExternalLink size={15} />
                     </a>
                     {project.contributionUrl && (
                       <a href={project.contributionUrl} target="_blank" rel="noreferrer">

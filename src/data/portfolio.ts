@@ -271,6 +271,7 @@ export const projects = [
       "Contributed URL-backed candidate status filtering and updated the scoring-criteria API contract and TypeScript models.",
     ],
     repositoryUrl: "https://github.com/Ahmad-Helmy/intern-cv-screening",
+    repositoryLabel: "View team repository",
     contributionUrl:
       "https://github.com/Ahmad-Helmy/intern-cv-screening/pulls?q=is%3Apr+author%3AMohamedAbdallah999",
   },
@@ -281,6 +282,30 @@ export const projects = [
     technologies: ["Flutter", "Node.js", "Firebase", "Qdrant", "LangChain.js"],
     description:
       "AI-powered mobile application using Flutter and Node.js, based on RAG architecture with Firebase authentication, Qdrant vector database, LangChain.js orchestration, and LLM-based personalized diet and workout generation.",
+  },
+  {
+    title: "Konooz Studio Inventory & Point-of-Sale System",
+    type: "Freelance Client Project",
+    category: "Real-Time Inventory & POS",
+    featured: true,
+    technologies: ["React 19", "TypeScript", "Express 5", "PostgreSQL", "Prisma", "Dexie", "Cloudflare"],
+    description:
+      "A production full-stack system for a dress shop operating across multiple devices. It manages models, colours, pack configurations, live stock, checkout, deposits, refunds, sales reporting, and printable or PDF receipts.",
+    evidence: "71 authored commits • production deployment documented",
+    implementation: [
+      "Built a server-authoritative Express and Prisma API over PostgreSQL, with nested model-to-colour-to-pack CRUD, Zod validation, and Decimal-based pricing calculated exclusively on the server.",
+      "Implemented serializable checkout transactions that reserve stock atomically, reject insufficient inventory, snapshot sale-time catalogue and price data, and restore pack quantities during refunds.",
+      "Synchronized devices through versioned API state, repeatable-read snapshots, 30-second and event-driven refreshes, BroadcastChannel notifications, and a Dexie IndexedDB cache. Timestamp checks reject stale edits instead of overwriting newer stock.",
+      "Secured and deployed the application with short-lived JWT access tokens, rotated HttpOnly refresh sessions, login throttling, Helmet/CSP, locked CORS, Docker, Neon PostgreSQL, Cloudflare Workers, and Cloudflare Pages.",
+    ],
+    contributions: [
+      "Designed and delivered the freelance system end to end, covering inventory operations, checkout, payment tracking, reporting, and receipt generation.",
+      "Created the normalized pack-based inventory model and a guarded production migration with backups, explicit mapping approval, validation reports, and rollback procedures.",
+      "Added unit, API, and browser-flow coverage for authentication, monetary calculations, stock integrity, synchronization, receipts, refunds, and responsive layout behavior.",
+      "Prepared the production release workflow, deployment documentation, health checks, structured logs, security controls, and smoke-test procedure.",
+    ],
+    repositoryUrl: "https://github.com/MohamedAbdallah999/konooz-studio-Website",
+    repositoryLabel: "View project repository",
   },
   {
     title: "Agentic AI",
