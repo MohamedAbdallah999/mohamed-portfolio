@@ -218,9 +218,6 @@ function App() {
             <span className="splash-discipline">Software Engineering</span>
           </div>
           <div className="splash-progress" aria-label="Loading portfolio">
-            <div className="splash-progress-copy">
-              <span>Preparing my engineering portfolio</span>
-            </div>
             <div className="splash-progress-rail" aria-hidden="true">
               <span className="splash-progress-fill" />
             </div>
