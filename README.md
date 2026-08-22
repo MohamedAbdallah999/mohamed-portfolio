@@ -8,8 +8,8 @@ Professional 3D animated portfolio website for Mohamed Abdallah Mohamed, built w
 - First-person, recruiter-friendly sections for About, Education, Experience, Projects, Skills, Certificates, Documents, GitHub, and Contact.
 - Project descriptions reconciled against the supplied CV and the implementation found across all accessible GitHub repositories.
 - Direct repository links only where a matching codebase was verified; CV-only projects remain visible without misleading links.
-- Personal photo, CV, cover letter, certificate PDF, and all certificate images integrated from the uploaded files.
-- Working download buttons for the CV, cover letter, full certificates PDF, and certificate images.
+- Personal photo, CV, role-specific Business Analyst and Back-End cover letters, certificate PDF, and all certificate images integrated from the uploaded files.
+- Working download buttons for the CV, both cover letters, full certificates PDF, and certificate images.
 - Interactive certificates gallery with modal preview.
 - Responsive design for desktop, tablet, and mobile.
 - SEO metadata and Open Graph tags in `index.html`.
@@ -25,7 +25,8 @@ public/
     certificate image files
   documents/
     Mohamed_Abdallah_CV.pdf
-    Mohamed_Abdallah_Cover_Letter.docx
+    Mohamed_Abdallah_Cover_Letter_BA.docx
+    Mohamed_Abdallah_Cover_Letter_Back-End.docx
     Mohamed_234552.pdf
 src/
   data/

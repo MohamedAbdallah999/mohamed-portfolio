@@ -61,11 +61,19 @@ export const documents = [
     icon: FileText,
   },
   {
-    title: "Cover Letter",
+    title: "Business Analyst Cover Letter",
     label: "DOCX",
-    description: "My application letter for back-end development, business analysis, and software engineering roles.",
-    href: "/documents/Mohamed_Abdallah_Cover_Letter.docx",
-    action: "Download Cover Letter",
+    description: "My application letter tailored to business analysis, requirements, stakeholder collaboration, and software delivery roles.",
+    href: "/documents/Mohamed_Abdallah_Cover_Letter_BA.docx",
+    action: "Download BA Cover Letter",
+    icon: Mail,
+  },
+  {
+    title: "Back-End Developer Cover Letter",
+    label: "DOCX",
+    description: "My application letter tailored to back-end development, Spring services, secure APIs, and production systems.",
+    href: "/documents/Mohamed_Abdallah_Cover_Letter_Back-End.docx",
+    action: "Download Back-End Cover Letter",
     icon: Mail,
   },
   {
