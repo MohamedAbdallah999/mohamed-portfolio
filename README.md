@@ -1,11 +1,13 @@
 # Mohamed Abdallah Mohamed Portfolio
 
-Professional 3D animated portfolio website for Mohamed Abdallah Mohamed, built with React, Vite, TypeScript, Tailwind CSS, Framer Motion, Three.js, React Three Fiber, and Lucide icons.
+Professional 3D animated portfolio website for Mohamed Abdallah Mohamed, built with React, Vite, TypeScript, custom responsive CSS, Framer Motion, Three.js, React Three Fiber, and Lucide icons.
 
 ## Features
 
 - Full-screen animated 3D hero section with software engineering visual elements.
-- Recruiter-friendly sections for About, Education, Experience, Projects, Skills, Certificates, Documents, GitHub, and Contact.
+- First-person, recruiter-friendly sections for About, Education, Experience, Projects, Skills, Certificates, Documents, GitHub, and Contact.
+- Project descriptions reconciled against the supplied CV and the implementation found across all accessible GitHub repositories.
+- Direct repository links only where a matching codebase was verified; CV-only projects remain visible without misleading links.
 - Personal photo, CV, cover letter, certificate PDF, and all certificate images integrated from the uploaded files.
 - Working download buttons for the CV, cover letter, full certificates PDF, and certificate images.
 - Interactive certificates gallery with modal preview.
@@ -77,6 +79,6 @@ Recommended build settings:
 
 ## Notes
 
-- The GitHub section uses static cards and the public GitHub profile link, so no GitHub API token is required.
+- The GitHub section uses static, evidence-based cards and the public GitHub profile link, so no GitHub API token is required at runtime.
 - The contact form is front-end only and opens the visitor's email client addressed to `mohamed1392003@gmail.com` with the submitted name, email, and message included.
 - If an image or document is replaced later, keep the same file name or update the matching path in `src/data/portfolio.ts`.

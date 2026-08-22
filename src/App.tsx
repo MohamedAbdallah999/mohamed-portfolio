@@ -189,7 +189,7 @@ function App() {
         `Name: ${senderName}`,
         `Email: ${senderEmail}`,
         "",
-        "Sent from Mohamed Abdallah Mohamed's portfolio website.",
+        "Sent through the portfolio contact form.",
       ].join("\n"),
     );
 
@@ -219,7 +219,7 @@ function App() {
           </div>
           <div className="splash-progress" aria-label="Loading portfolio">
             <div className="splash-progress-copy">
-              <span>Initializing neural workspace</span>
+              <span>Preparing my engineering portfolio</span>
             </div>
             <div className="splash-progress-rail" aria-hidden="true">
               <span className="splash-progress-fill" />
@@ -253,9 +253,9 @@ function App() {
           </div>
           <div className="hero-content">
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <span className="status-pill">Available for software engineering opportunities</span>
+              <span className="status-pill">Open to back-end development and business analysis opportunities</span>
               <h1>{person.name}</h1>
-              <p className="hero-title">Software Engineering Graduate / Back-End Developer / Full-Stack &amp; AI Developer</p>
+              <p className="hero-title">Software Engineering Graduate / Back-End Developer / Business Analyst</p>
               <p className="hero-summary">{person.summary}</p>
               <div className="hero-actions">
                 <a className="primary-action" href="#projects">
@@ -292,7 +292,7 @@ function App() {
             <div className="profile-meta">
               <span><MapPin size={16} /> {person.location}</span>
               <span><GraduationCap size={16} /> Distinction (Honors) | GPA 3.7</span>
-              <span><BriefcaseBusiness size={16} /> Military status: Exempted</span>
+              <span><BriefcaseBusiness size={16} /> Military status: Exempt</span>
             </div>
           </motion.div>
           <a className="scroll-cue" href="#about" aria-label="Scroll to about section">
@@ -301,17 +301,16 @@ function App() {
         </section>
 
         <div className="content-shell">
-          <Section id="about" eyebrow="Profile" title="Full-stack delivery, software quality, and agentic AI.">
+          <Section id="about" eyebrow="Profile" title="I connect business requirements with reliable software delivery.">
             <div className="about-grid">
               <p>
-                Mohamed Abdallah Mohamed is a Software Engineering graduate from The British University in Egypt / London South Bank
-                University, graduating with Distinction (Honors) and a GPA of 3.7. Based in New Cairo and exempted from military
-                service, he brings practical experience from Celfocus, Connect Digital Solutions, CIB, and Mazaya Group.
+                I earned a dual Software Engineering degree from The British University in Egypt and London South Bank University,
+                graduating with Distinction (Honors) and a GPA of 3.7. I am based in New Cairo, and my military status is exempt.
               </p>
               <p>
-                His Celfocus internship expanded that foundation across Spring and React feature development, QA and system testing,
-                DevOps, prompt engineering, MCP servers, and agentic AI workflows. His project work also spans Flutter and Firebase
-                applications, RAG systems, vector retrieval, and adaptive educational AI.
+                I have applied that foundation through Celfocus and CDS internships and by delivering Konooz Studio's production
+                inventory and point-of-sale system. My work spans requirements analysis, Java and Spring microservices, TypeScript
+                and React products, Flutter applications, automated testing, deployment, and retrieval-augmented AI.
               </p>
               <div className="highlight-grid">
                 {highlights.map((item) => (
@@ -325,7 +324,7 @@ function App() {
             </div>
           </Section>
 
-          <Section id="education" eyebrow="Education" title="Academic foundation">
+          <Section id="education" eyebrow="Education" title="How I built my academic foundation">
             <div className="timeline">
               {education.map((item) => (
                 <article className="timeline-item" key={item.institution}>
@@ -338,7 +337,7 @@ function App() {
             </div>
           </Section>
 
-          <Section id="experience" eyebrow="Experience" title="Internships and professional exposure">
+          <Section id="experience" eyebrow="Experience" title="How I apply software engineering in practice">
             <div className="experience-grid">
               {experience.map((item) => (
                 <article className="glass-card experience-card" key={`${item.company}-${item.role}`}>
@@ -359,7 +358,7 @@ function App() {
             </div>
           </Section>
 
-          <Section id="courses" eyebrow="Courses" title="Focused technical learning">
+          <Section id="courses" eyebrow="Courses" title="How I continue developing my skills">
             <div className="course-grid">
               {courses.map((course) => (
                 <article className="glass-card" key={course.title}>
@@ -379,7 +378,7 @@ function App() {
             </div>
           </Section>
 
-          <Section id="projects" eyebrow="Projects" title="Selected software engineering work">
+          <Section id="projects" eyebrow="Projects" title="What I have built">
             <div className="project-grid">
               {projects.map((project) => (
                 <motion.article
@@ -394,7 +393,7 @@ function App() {
                   </div>
                   <h3>{project.title}</h3>
                   <p className="project-description">{project.description}</p>
-                  {project.evidence && <p className="project-evidence">Verified contribution: {project.evidence}</p>}
+                  {project.evidence && <p className="project-evidence">Repository evidence: {project.evidence}</p>}
                   {project.implementation && (
                     <div className="project-detail-block">
                       <h4>How it was implemented</h4>
@@ -421,9 +420,11 @@ function App() {
                     ))}
                   </div>
                   <div className="project-links">
-                    <a href={project.repositoryUrl ?? links.github} target="_blank" rel="noreferrer">
-                      {project.repositoryLabel ?? (project.repositoryUrl ? "View project repository" : "View GitHub profile")} <ExternalLink size={15} />
-                    </a>
+                    {project.repositoryUrl && (
+                      <a href={project.repositoryUrl} target="_blank" rel="noreferrer">
+                        {project.repositoryLabel ?? "View project repository"} <ExternalLink size={15} />
+                      </a>
+                    )}
                     {project.contributionUrl && (
                       <a href={project.contributionUrl} target="_blank" rel="noreferrer">
                         View my pull requests <ExternalLink size={15} />
@@ -436,7 +437,7 @@ function App() {
             </div>
           </Section>
 
-          <Section id="skills" eyebrow="Skills" title="Technical stack and engineering capabilities">
+          <Section id="skills" eyebrow="Skills" title="What I use to deliver software">
             <div className="skills-grid">
               {skillCategories.map((category) => (
                 <article className="glass-card skill-card" key={category.title}>
@@ -454,7 +455,7 @@ function App() {
             </div>
           </Section>
 
-          <Section id="certificates" eyebrow="Certificates" title="Verified learning and internship evidence">
+          <Section id="certificates" eyebrow="Certificates" title="How I document my professional learning">
             <div className="certificate-toolbar">
               <DownloadLink href="/documents/Mohamed_234552.pdf">Download Full Certificates PDF</DownloadLink>
               {certificateGroups.map((group) => (
@@ -475,7 +476,7 @@ function App() {
             </div>
           </Section>
 
-          <Section id="documents" eyebrow="Documents" title="Application-ready files">
+          <Section id="documents" eyebrow="Documents" title="My application-ready files">
             <div className="documents-grid">
               {documents.map((document) => (
                 <article className="document-card" key={document.title}>
@@ -489,14 +490,14 @@ function App() {
             </div>
           </Section>
 
-          <Section id="github" eyebrow="GitHub" title="Repository profile and engineering identity">
+          <Section id="github" eyebrow="GitHub" title="How my repositories support my engineering profile">
             <div className="github-panel">
               <div>
                 <Github size={36} />
                 <h3>MohamedAbdallah999</h3>
                 <p>
-                  GitHub is presented as Mohamed's project archive for academic systems, AI applications, mobile work, and
-                  full-stack development. The section avoids token-based API calls so the portfolio remains deployment-ready.
+                  I use GitHub to document production delivery, collaborative internship systems, mobile and AI applications,
+                  and academic engineering work. The projects shown above link only to repositories I could verify.
                 </p>
                 <a className="primary-action" href={links.github} target="_blank" rel="noreferrer">
                   View GitHub Repositories <ExternalLink size={18} />
@@ -514,10 +515,10 @@ function App() {
             </div>
           </Section>
 
-          <Section id="contact" eyebrow="Contact" title="Recruiter-friendly contact">
+          <Section id="contact" eyebrow="Contact" title="How to contact me">
             <div className="contact-grid">
               <div className="contact-panel">
-                <h3>Open to software engineering, back-end, full-stack, QA, DevOps, and AI application opportunities.</h3>
+                <h3>I am seeking back-end development, business analysis, and software engineering opportunities.</h3>
                 <a href={links.email}><Mail size={18} /> {person.email}</a>
                 <a href={links.phone}><Phone size={18} /> {person.phone}</a>
                 <a href={links.linkedin} target="_blank" rel="noreferrer"><Linkedin size={18} /> LinkedIn profile</a>
@@ -548,7 +549,7 @@ function App() {
 
       <footer className="footer">
         <strong>{person.name}</strong>
-        <span>Software Engineering Graduate | Back-End Developer | Full-Stack &amp; AI Developer</span>
+        <span>Software Engineering Graduate | Back-End Developer | Business Analyst</span>
         <div>
           <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>
           <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
