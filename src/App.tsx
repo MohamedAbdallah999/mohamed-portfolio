@@ -14,8 +14,11 @@ import {
   Linkedin,
   Mail,
   MapPin,
+  Menu,
+  Minus,
   Moon,
   Phone,
+  Plus,
   Send,
   Sun,
   X,
@@ -24,7 +27,7 @@ import type { FormEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import {
-  certificateGroups,
+  academicTranscript,
   certificates,
   courses,
   documents,
@@ -154,6 +157,7 @@ function DownloadLink({
 function App() {
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [lightMode, setLightMode] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const reducedMotion = Boolean(useReducedMotion());
   const { scrollYProgress } = useScroll();
@@ -215,7 +219,7 @@ function App() {
               <span>Abdallah</span>
               <span>Mohamed</span>
             </strong>
-            <span className="splash-discipline">Software Engineering</span>
+            <span className="splash-discipline">Software Engineer</span>
           </div>
           <div className="splash-progress" aria-label="Loading portfolio">
             <div className="splash-progress-rail" aria-hidden="true">
@@ -231,13 +235,23 @@ function App() {
           <span>MA</span>
           <strong>Mohamed Abdallah</strong>
         </a>
-        <nav aria-label="Primary navigation">
+        <nav id="primary-navigation" className={mobileMenuOpen ? "mobile-nav-open" : ""} aria-label="Primary navigation">
           {navItems.map(([label, id]) => (
-            <a key={id} href={`#${id}`}>
+            <a key={id} href={`#${id}`} onClick={() => setMobileMenuOpen(false)}>
               {label}
             </a>
           ))}
         </nav>
+        <button
+          className="icon-button menu-toggle"
+          type="button"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-controls="primary-navigation"
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((value) => !value)}
+        >
+          {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
         <button className="icon-button" type="button" onClick={() => setLightMode((value) => !value)} aria-label="Toggle theme">
           {lightMode ? <Moon size={18} /> : <Sun size={18} />}
         </button>
@@ -332,26 +346,74 @@ function App() {
                 </article>
               ))}
             </div>
+            <div className="academic-results">
+              <div className="academic-award">
+                <span className="academic-label">BUE academic transcript</span>
+                <h3>{academicTranscript.classification}</h3>
+                <div className="academic-final-mark">
+                  <strong>{academicTranscript.finalAverage}</strong>
+                  <span>Final award average</span>
+                </div>
+                <p>The transcript records module grades and annual averages from 2022 to 2026.</p>
+                <div className="academic-actions">
+                  <a className="ghost-action" href={academicTranscript.href} target="_blank" rel="noreferrer">
+                    View transcript <ExternalLink size={17} />
+                  </a>
+                  <DownloadLink href={academicTranscript.href}>Download PDF</DownloadLink>
+                </div>
+              </div>
+              <div className="academic-years" aria-label="University yearly averages">
+                {academicTranscript.yearlyAverages.map((item) => (
+                  <div className="academic-year" key={item.year}>
+                    <span>{item.year}</span>
+                    <strong>{item.average}</strong>
+                    <small>Year average</small>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Section>
 
           <Section id="experience" eyebrow="Experience" title="How I apply software engineering in practice">
-            <div className="experience-grid">
-              {experience.map((item) => (
-                <article className="glass-card experience-card" key={`${item.company}-${item.role}`}>
-                  <div className="card-topline">
-                    <span>{item.date}</span>
-                    <span>{item.type}</span>
+            <div className="experience-sections">
+              {([
+                { id: "internship", title: "Internships" },
+                { id: "freelance", title: "Freelance & client work" },
+              ] as const).map((group, groupIndex) => {
+                const roles = experience.filter((item) => item.group === group.id);
+                return (
+                  <div className="experience-group" key={group.id}>
+                    <div className="experience-group-heading">
+                      <div>
+                        <span>{String(groupIndex + 1).padStart(2, "0")} / Experience</span>
+                        <h3>{group.title}</h3>
+                      </div>
+                      <small>{roles.length} {roles.length === 1 ? "role" : "roles"}</small>
+                    </div>
+                    <div className="experience-stack">
+                      {roles.map((item, index) => (
+                        <article className="glass-card experience-card" key={`${item.company}-${item.role}`}>
+                          <div className="experience-rail">
+                            <span className="experience-number">{String(index + 1).padStart(2, "0")}</span>
+                            <span className="experience-date">{item.date}</span>
+                            <span className="experience-type">{item.type}</span>
+                          </div>
+                          <div className="experience-body">
+                            <h4>{item.role}</h4>
+                            <strong>{item.company}</strong>
+                            <ul className="experience-list">
+                              {item.highlights.map((highlight) => (
+                                <li key={highlight}>{highlight}</li>
+                              ))}
+                            </ul>
+                            <small><MapPin size={14} /> {item.location}</small>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
                   </div>
-                  <h3>{item.role}</h3>
-                  <strong>{item.company}</strong>
-                  <ul className="experience-list">
-                    {item.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
-                    ))}
-                  </ul>
-                  <small><MapPin size={14} /> {item.location}</small>
-                </article>
-              ))}
+                );
+              })}
             </div>
           </Section>
 
@@ -376,60 +438,83 @@ function App() {
           </Section>
 
           <Section id="projects" eyebrow="Projects" title="What I have built">
-            <div className="project-grid">
-              {projects.map((project) => (
-                <motion.article
-                  className={`project-card ${project.featured ? "featured" : ""}`}
-                  key={project.title}
-                  whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
-                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
-                >
-                  <div className="card-topline">
-                    <span>{project.type}</span>
-                    <span>{project.category}</span>
+            <div className="project-sections">
+              {([
+                { title: "Featured work", description: "Client, internship, and graduation projects", featured: true },
+                { title: "More projects", description: "Additional academic and independent builds", featured: false },
+              ] as const).map((group) => (
+                <div className="project-group" key={group.title}>
+                  <div className="project-group-heading">
+                    <h3>{group.title}</h3>
+                    <p>{group.description}</p>
                   </div>
-                  <h3>{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                  {project.evidence && <p className="project-evidence">Repository evidence: {project.evidence}</p>}
-                  {project.implementation && (
-                    <div className="project-detail-block">
-                      <h4>How it was implemented</h4>
-                      <ul>
-                        {project.implementation.map((detail) => (
-                          <li key={detail}>{detail}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {project.contributions && (
-                    <div className="project-detail-block project-contribution-block">
-                      <h4>My verified contributions</h4>
-                      <ul>
-                        {project.contributions.map((contribution) => (
-                          <li key={contribution}>{contribution}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  <div className="tag-row">
-                    {project.technologies.map((tech) => (
-                      <span key={tech}>{tech}</span>
+                  <div className={`project-grid ${group.featured ? "project-grid-featured" : "project-grid-more"}`}>
+                    {projects.filter((project) => Boolean(project.featured) === group.featured).map((project) => (
+                      <motion.article
+                        className="project-card"
+                        key={project.title}
+                        whileHover={{ y: -3 }}
+                        transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                      >
+                        <div className="project-card-topline">
+                          <span>{project.type}</span>
+                          <span>{project.category}</span>
+                        </div>
+                        <h4>{project.title}</h4>
+                        <p className="project-description">{project.description}</p>
+                        {project.evidence && <p className="project-evidence">{project.evidence}</p>}
+                        {(project.implementation || project.contributions) && (
+                          <details className="project-details">
+                            <summary>
+                              <span className="project-details-open-label">View more contribution details</span>
+                              <span className="project-details-close-label">View fewer contribution details</span>
+                              <Plus className="project-details-plus" size={18} aria-hidden="true" />
+                              <Minus className="project-details-minus" size={18} aria-hidden="true" />
+                            </summary>
+                            {project.implementation && (
+                              <div className="project-detail-block">
+                                <h5>How it was implemented</h5>
+                                <ul>
+                                  {project.implementation.map((detail) => (
+                                    <li key={detail}>{detail}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {project.contributions && (
+                              <div className="project-detail-block project-contribution-block">
+                                <h5>My contributions</h5>
+                                <ul>
+                                  {project.contributions.map((contribution) => (
+                                    <li key={contribution}>{contribution}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </details>
+                        )}
+                        <div className="tag-row">
+                          {project.technologies.map((tech) => (
+                            <span key={tech}>{tech}</span>
+                          ))}
+                        </div>
+                        <div className="project-links">
+                          {project.repositoryUrl && (
+                            <a href={project.repositoryUrl} target="_blank" rel="noreferrer">
+                              {project.repositoryLabel ?? "View project repository"} <ExternalLink size={15} />
+                            </a>
+                          )}
+                          {project.contributionUrl && (
+                            <a href={project.contributionUrl} target="_blank" rel="noreferrer">
+                              View my pull requests <ExternalLink size={15} />
+                            </a>
+                          )}
+                          <a href="#contact">Discuss project</a>
+                        </div>
+                      </motion.article>
                     ))}
                   </div>
-                  <div className="project-links">
-                    {project.repositoryUrl && (
-                      <a href={project.repositoryUrl} target="_blank" rel="noreferrer">
-                        {project.repositoryLabel ?? "View project repository"} <ExternalLink size={15} />
-                      </a>
-                    )}
-                    {project.contributionUrl && (
-                      <a href={project.contributionUrl} target="_blank" rel="noreferrer">
-                        View my pull requests <ExternalLink size={15} />
-                      </a>
-                    )}
-                    <a href="#contact">Discuss project</a>
-                  </div>
-                </motion.article>
+                </div>
               ))}
             </div>
           </Section>
@@ -453,18 +538,10 @@ function App() {
           </Section>
 
           <Section id="certificates" eyebrow="Certificates" title="How I document my professional learning">
-            <div className="certificate-toolbar">
-              <DownloadLink href="/documents/Mohamed_234552.pdf">Download Full Certificates PDF</DownloadLink>
-              {certificateGroups.map((group) => (
-                <DownloadLink key={group.title} href={group.href}>
-                  {group.action}
-                </DownloadLink>
-              ))}
-            </div>
             <div className="certificate-grid">
               {certificates.map((certificate) => (
                 <button className="certificate-card" type="button" key={certificate.file} onClick={() => setSelectedCertificate(certificate)}>
-                  <img src={certificate.src} alt={certificate.title} loading="lazy" />
+                  <img src={certificate.src} alt={certificate.title} loading="lazy" style={{ objectPosition: "thumbnailPosition" in certificate ? certificate.thumbnailPosition : "top center" }} />
                   <span>{certificate.date}</span>
                   <h3>{certificate.title}</h3>
                   <p>{certificate.description}</p>
@@ -489,13 +566,15 @@ function App() {
 
           <Section id="github" eyebrow="GitHub" title="How my repositories support my engineering profile">
             <div className="github-panel">
-              <div>
-                <Github size={36} />
-                <h3>MohamedAbdallah999</h3>
-                <p>
-                  I use GitHub to document production delivery, collaborative internship systems, mobile and AI applications,
-                  and academic engineering work. The projects shown above link only to repositories I could verify.
-                </p>
+              <div className="github-intro">
+                <div className="github-intro-copy">
+                  <Github size={36} />
+                  <h3>MohamedAbdallah999</h3>
+                  <p>
+                    I use GitHub to document production delivery, collaborative internship systems, mobile and AI applications,
+                    and academic engineering work. The projects shown above link only to repositories I could verify.
+                  </p>
+                </div>
                 <a className="primary-action" href={links.github} target="_blank" rel="noreferrer">
                   View GitHub Repositories <ExternalLink size={18} />
                 </a>
@@ -561,11 +640,11 @@ function App() {
               <X size={20} />
             </button>
             <img src={selectedCertificate.src} alt={selectedCertificate.title} />
-            <div>
-              <span><Calendar size={16} /> {selectedCertificate.date}</span>
+            <div className="certificate-modal-info">
+              <span className="certificate-modal-date"><Calendar size={16} /> {selectedCertificate.date}</span>
               <h3>{selectedCertificate.title}</h3>
               <p>{selectedCertificate.description}</p>
-              <DownloadLink href={selectedCertificate.src}>Download Certificate</DownloadLink>
+              <DownloadLink href={selectedCertificate.src} className="certificate-download">Download certificate</DownloadLink>
             </div>
           </div>
         </div>

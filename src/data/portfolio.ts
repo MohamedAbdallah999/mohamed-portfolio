@@ -51,6 +51,18 @@ export const navItems = [
   ["Contact", "contact"],
 ] as const;
 
+export const academicTranscript = {
+  href: "/documents/Mohamed_Abdallah_BUE_Academic_Transcript.pdf",
+  classification: "Distinction with Honours",
+  finalAverage: 86,
+  yearlyAverages: [
+    { year: "Preparatory Year", average: 83 },
+    { year: "Degree Year One", average: 88 },
+    { year: "Software Engineering / Year Two", average: 86 },
+    { year: "Software Engineering / Year Three", average: 87 },
+  ],
+};
+
 export const documents = [
   {
     title: "Curriculum Vitae",
@@ -84,16 +96,31 @@ export const documents = [
     action: "Download Full Certificates PDF",
     icon: FileBadge,
   },
-];
-
-export const certificateGroups = [
-  { title: "CDS Internship Certificate", href: "/certificates/CDS_internship.png", action: "Download CDS Internship Certificate" },
-  { title: "ITI React Certificate", href: "/certificates/iti_REACT_Course.png", action: "Download ITI React Certificate" },
-  { title: "Mazaya Certificates", href: "/certificates/Mazaya_internship(1).png", action: "Download Mazaya Certificates" },
-  { title: "CIB Certificates", href: "/certificates/CIB_internship(1).png", action: "Download CIB Certificates" },
+  {
+    title: "BUE Academic Transcript",
+    label: "PDF",
+    description: "My module grades, annual averages, and final degree classification. Personal identifiers are removed from this public copy.",
+    href: academicTranscript.href,
+    action: "Download Transcript",
+    icon: GraduationCap,
+  },
 ];
 
 export const certificates = [
+  {
+    file: "Celfocus_Internship_Completion.png",
+    title: "Celfocus Summer Internship Completion",
+    description: "I completed the 2026 Summer Internship Program at the Celfocus Egypt Delivery Center.",
+    date: "1 July 2026 to 31 August 2026",
+    thumbnailPosition: "center 30%",
+  },
+  {
+    file: "Celfocus_Internship_Experience_Redacted.png",
+    title: "Celfocus Internship Experience Certificate",
+    description: "Celfocus confirmed my work in its Digital Business unit during the 2026 internship. My national ID number is removed from this public copy.",
+    date: "1 July 2026 to 31 August 2026",
+    thumbnailPosition: "center 15%",
+  },
   {
     file: "CDS_internship.png",
     title: "CDS Certificate of Internship",
@@ -163,23 +190,39 @@ export const education = [
 
 export const experience = [
   {
+    role: "Freelance Software Engineer - El7a2ny",
+    company: "El7a2ny Car Service Platform",
+    location: "Team freelance project",
+    type: "Full-Stack Development",
+    group: "freelance",
+    date: "September 2026 - Present",
+    highlights: [
+      "I am building a car-service platform with my team across customer and business workflows, with a live release in progress.",
+      "I contributed role-based authentication, shared web and mobile UI components, customer booking and ordering flows, and the admin dashboard and management pages.",
+      "I connected admin views to API modules for businesses, bookings, inventory, orders, services, and service requests, and added verification coverage for these flows.",
+    ],
+  },
+  {
     role: "Software Engineer Intern",
     company: "Celfocus",
     location: "Cairo, Egypt",
     type: "Hybrid",
+    group: "internship",
     date: "July 2026 - September 2026",
     highlights: [
       "I rotated across back-end, front-end, QA and system testing, DevOps, and AI while contributing to live company projects.",
       "I used Java, Spring Boot, React, REST APIs, Git, and Docker to implement and test features across the delivery lifecycle.",
       "I worked with requirements and technical issues across cross-functional teams, which strengthened my business analysis and delivery skills.",
       "I built and used Model Context Protocol servers, applied prompt engineering, and developed agentic AI workflows.",
+      "On the Crowdly internship project, I built the ticket checkout interface, venue seating map, and reusable navigation and feedback components.",
     ],
   },
   {
     role: "Freelance Software Engineer - Konooz Studio",
     company: "Konooz Studio",
     location: "Freelance Project",
-    type: "Back-End Development and Product Delivery",
+    type: "Full Stack Development and Product Delivery",
+    group: "freelance",
     date: "June 2026",
     highlights: [
       "I translated retail workflows into a production inventory and point-of-sale system for models, colours, packs, sales, deposits, refunds, and receipts.",
@@ -192,6 +235,7 @@ export const experience = [
     company: "Connect Digital Solutions (CDS)",
     location: "Cairo, Egypt",
     type: "Hybrid",
+    group: "internship",
     date: "July 2025 - September 2025",
     highlights: [
       "I developed back-end services with Java, Spring Boot, Spring Data JPA, Spring Security, and REST APIs.",
@@ -203,6 +247,7 @@ export const experience = [
     company: "Commercial International Bank (CIB)",
     location: "Cairo, Egypt",
     type: "Online",
+    group: "internship",
     date: "July 2024 - August 2024",
     highlights: [
       "I completed cybersecurity training covering common threats, protection strategies, and digital awareness.",
@@ -228,6 +273,28 @@ export const courses = [
 ];
 
 export const projects = [
+  {
+    title: "El7a2ny Car Service Platform",
+    type: "Freelance Team Project · In Development",
+    category: "Car Services Marketplace and Operations",
+    featured: true,
+    technologies: ["React", "React Native", "TypeScript", "Express", "Prisma", "PostgreSQL", "Zod", "Turborepo"],
+    description: "I am building El7a2ny with a team as a web and mobile platform connecting customers with car-service businesses. The product covers service discovery, vehicles, bookings, parts orders, and business operations; we are working toward a live release.",
+    evidence: "Team repository with customer, admin, and super-admin web and mobile workspaces; active development",
+    implementation: [
+      "The monorepo uses pnpm workspaces and Turborepo to organize six React and React Native applications, shared packages, and a modular Express API.",
+      "The backend models customers, businesses, vehicles, services, bookings, service requests, products, inventory, orders, and payments in PostgreSQL through Prisma.",
+      "Authentication and authorization separate customer, admin, and super-admin roles, with email verification and additional verification for privileged sign-in.",
+    ],
+    contributions: [
+      "I implemented and refined role-based authentication and registration flows, including verification steps, admin access, and shared validation.",
+      "I built reusable web and mobile component libraries and improved customer screens for service discovery, vehicles, bookings, cart, checkout, and orders.",
+      "I developed admin sign-in, registration, dashboard, and management pages and connected them to API modules for bookings, inventory, products, services, orders, and business data.",
+      "I added backend and end-to-end verification for authentication and admin workflows while preparing the platform for release with my team.",
+    ],
+    repositoryUrl: "https://github.com/MohamedAbdallah999/El7a2ny-car-service-platform",
+    repositoryLabel: "View team repository",
+  },
   {
     title: "Konooz Studio Inventory and Point-of-Sale System",
     type: "Freelance Client Project",
@@ -308,6 +375,28 @@ export const projects = [
     repositoryUrl: "https://github.com/Ahmad-Helmy/intern-cv-screening",
     repositoryLabel: "View team repository",
     contributionUrl: "https://github.com/Ahmad-Helmy/intern-cv-screening/pulls?q=is%3Apr+author%3AMohamedAbdallah999",
+  },
+  {
+    title: "Crowdly Event and Ticketing Platform",
+    type: "Celfocus Internship Team Project",
+    category: "Event Discovery, Seating and Checkout",
+    featured: true,
+    technologies: ["Next.js", "React", "TypeScript", "Express", "Prisma", "MongoDB", "Stripe"],
+    description: "I contributed to Crowdly during my Celfocus internship. The team built an event platform with event and venue browsing, ticket selection, seating layouts, account flows, orders, and payment integration.",
+    evidence: "20 authored commits in the team repository covering checkout, venue flows, and reusable UI",
+    implementation: [
+      "A Next.js client uses React components and data hooks, while an Express API organizes authentication, events, venues, orders, and payments.",
+      "Prisma models users, venues, events, tickets, and orders in MongoDB; the checkout interface integrates Stripe payment components.",
+      "Venue stage sections are represented in the data model and aligned with event ticket types and availability for the seating experience.",
+    ],
+    contributions: [
+      "I built a responsive four-step ticket checkout page for ticket selection, account details, payment, and confirmation.",
+      "I created the reusable stage and seating-map component, then aligned venue sections and event ticket availability across client types and API services.",
+      "I implemented navigation components including the navbar, mobile navigation, breadcrumbs, tabs, pagination, and admin sidebar.",
+      "I added feedback components including a toast, progress stepper, progress bar, tooltip, and empty states, then refined responsive layouts.",
+    ],
+    repositoryUrl: "https://github.com/ElBarBary01/Crowdly",
+    repositoryLabel: "View Celfocus team repository",
   },
   {
     title: "Agentic AI Learning System",
@@ -399,7 +488,7 @@ export const skillCategories = [
 
 export const highlights: Array<{ label: string; value: string; icon: LucideIcon }> = [
   { label: "Graduation Result", value: "Distinction (Honors)", icon: GraduationCap },
-  { label: "Professional Experience", value: "Celfocus, Konooz, CDS", icon: BriefcaseBusiness },
+  { label: "Professional Experience", value: "Celfocus, CDS, CIB", icon: BriefcaseBusiness },
   { label: "Core Stack", value: "Spring, TypeScript, React, Flutter", icon: Database },
   { label: "Career Focus", value: "Back-End and Business Analysis", icon: Award },
 ];
