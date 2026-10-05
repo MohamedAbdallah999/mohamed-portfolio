@@ -44,11 +44,25 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top left, rgba(56, 223, 245, 0.18), transparent 34rem),
-    radial-gradient(circle at 78% 12%, rgba(157, 140, 255, 0.12), transparent 32rem),
+    radial-gradient(
+      circle at top left,
+      rgba(56, 223, 245, 0.18),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 78% 12%,
+      rgba(157, 140, 255, 0.12),
+      transparent 32rem
+    ),
     linear-gradient(135deg, var(--bg), var(--bg-soft));
   color: var(--text);
-  font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Arial, sans-serif;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    Segoe UI,
+    Arial,
+    sans-serif;
 }
 
 a {
@@ -76,8 +90,16 @@ img {
   place-items: center;
   padding: clamp(1rem, 3vw, 2.5rem);
   background:
-    radial-gradient(circle at 50% 48%, rgba(56, 223, 245, 0.12), transparent 25rem),
-    radial-gradient(circle at 34% 62%, rgba(157, 140, 255, 0.06), transparent 32rem),
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(56, 223, 245, 0.12),
+      transparent 25rem
+    ),
+    radial-gradient(
+      circle at 34% 62%,
+      rgba(157, 140, 255, 0.06),
+      transparent 32rem
+    ),
     linear-gradient(145deg, #020617, #05070d 58%, #080d17);
   color: #f8fafc;
   overflow: hidden;
@@ -92,8 +114,18 @@ img {
   z-index: 5;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, transparent 36%, rgba(2, 6, 23, 0.18) 68%, rgba(2, 6, 23, 0.82) 100%),
-    linear-gradient(110deg, transparent 0 48%, rgba(56, 223, 245, 0.035) 50%, transparent 52% 100%);
+    radial-gradient(
+      circle at center,
+      transparent 36%,
+      rgba(2, 6, 23, 0.18) 68%,
+      rgba(2, 6, 23, 0.82) 100%
+    ),
+    linear-gradient(
+      110deg,
+      transparent 0 48%,
+      rgba(56, 223, 245, 0.035) 50%,
+      transparent 52% 100%
+    );
   animation: splashPulse 2.6s ease-in-out infinite alternate;
 }
 
@@ -103,7 +135,10 @@ img {
   inset: -10%;
   z-index: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(216, 227, 245, 0.76) 0.7px, transparent 0.8px);
+  background-image: radial-gradient(
+    rgba(216, 227, 245, 0.76) 0.7px,
+    transparent 0.8px
+  );
   background-size: 48px 48px;
   opacity: 0.16;
   animation: splashStarDrift 12s linear infinite;
@@ -149,14 +184,18 @@ img {
   width: min(680px, 78vw);
   height: min(370px, 44vw);
   border-style: dashed;
-  animation: splashWideOrbit 9s linear infinite, splashOrbitFade 1.5s ease 0.25s forwards;
+  animation:
+    splashWideOrbit 9s linear infinite,
+    splashOrbitFade 1.5s ease 0.25s forwards;
 }
 
 .splash-wire-orbit-tall {
   width: min(310px, 38vw);
   height: min(610px, 74vh);
   border-color: rgba(157, 140, 255, 0.14);
-  animation: splashTallOrbit 11s linear infinite reverse, splashOrbitFade 1.7s ease 0.35s forwards;
+  animation:
+    splashTallOrbit 11s linear infinite reverse,
+    splashOrbitFade 1.7s ease 0.35s forwards;
 }
 
 .splash-cube-orbiter {
@@ -185,8 +224,14 @@ img {
   position: absolute;
   inset: 0;
   border: 1px solid rgba(255, 255, 255, 0.22);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(148, 163, 184, 0.05));
-  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.06), 0 0 18px rgba(56, 223, 245, 0.08);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(148, 163, 184, 0.05)
+  );
+  box-shadow:
+    inset 0 0 18px rgba(255, 255, 255, 0.06),
+    0 0 18px rgba(56, 223, 245, 0.08);
   backface-visibility: visible;
 }
 
@@ -216,26 +261,50 @@ img {
 
 .splash-cube-teal .splash-cube-face {
   border-color: rgba(45, 212, 191, 0.5);
-  background: linear-gradient(145deg, rgba(94, 234, 212, 0.3), rgba(15, 118, 110, 0.08));
-  box-shadow: inset 0 0 20px rgba(45, 212, 191, 0.1), 0 0 24px rgba(45, 212, 191, 0.18);
+  background: linear-gradient(
+    145deg,
+    rgba(94, 234, 212, 0.3),
+    rgba(15, 118, 110, 0.08)
+  );
+  box-shadow:
+    inset 0 0 20px rgba(45, 212, 191, 0.1),
+    0 0 24px rgba(45, 212, 191, 0.18);
 }
 
 .splash-cube-blue .splash-cube-face {
   border-color: rgba(96, 165, 250, 0.5);
-  background: linear-gradient(145deg, rgba(147, 197, 253, 0.3), rgba(29, 78, 216, 0.08));
-  box-shadow: inset 0 0 20px rgba(96, 165, 250, 0.1), 0 0 24px rgba(96, 165, 250, 0.18);
+  background: linear-gradient(
+    145deg,
+    rgba(147, 197, 253, 0.3),
+    rgba(29, 78, 216, 0.08)
+  );
+  box-shadow:
+    inset 0 0 20px rgba(96, 165, 250, 0.1),
+    0 0 24px rgba(96, 165, 250, 0.18);
 }
 
 .splash-cube-violet .splash-cube-face {
   border-color: rgba(196, 181, 253, 0.5);
-  background: linear-gradient(145deg, rgba(221, 214, 254, 0.3), rgba(124, 58, 237, 0.08));
-  box-shadow: inset 0 0 20px rgba(196, 181, 253, 0.1), 0 0 24px rgba(157, 140, 255, 0.2);
+  background: linear-gradient(
+    145deg,
+    rgba(221, 214, 254, 0.3),
+    rgba(124, 58, 237, 0.08)
+  );
+  box-shadow:
+    inset 0 0 20px rgba(196, 181, 253, 0.1),
+    0 0 24px rgba(157, 140, 255, 0.2);
 }
 
 .splash-cube-silver .splash-cube-face {
   border-color: rgba(248, 250, 252, 0.48);
-  background: linear-gradient(145deg, rgba(248, 250, 252, 0.32), rgba(100, 116, 139, 0.08));
-  box-shadow: inset 0 0 20px rgba(248, 250, 252, 0.1), 0 0 24px rgba(226, 232, 240, 0.16);
+  background: linear-gradient(
+    145deg,
+    rgba(248, 250, 252, 0.32),
+    rgba(100, 116, 139, 0.08)
+  );
+  box-shadow:
+    inset 0 0 20px rgba(248, 250, 252, 0.1),
+    0 0 24px rgba(226, 232, 240, 0.16);
 }
 
 .splash-orbit-1 {
@@ -340,7 +409,12 @@ img {
 
 .splash-name span {
   width: fit-content;
-  background: linear-gradient(180deg, #fff 22%, var(--silver) 72%, #8ea1b8 115%);
+  background: linear-gradient(
+    180deg,
+    #fff 22%,
+    var(--silver) 72%,
+    #8ea1b8 115%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -349,7 +423,12 @@ img {
 .splash-name span:nth-child(2) {
   position: relative;
   z-index: 1;
-  background-image: linear-gradient(100deg, #f8fafc 10%, #92eaff 48%, #c8c0ff 92%);
+  background-image: linear-gradient(
+    100deg,
+    #f8fafc 10%,
+    #92eaff 48%,
+    #c8c0ff 92%
+  );
 }
 
 .splash-discipline {
@@ -453,13 +532,16 @@ img {
   display: grid;
   place-items: center;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--cyan), var(--violet));
   color: #020617;
   font-weight: 900;
 }
 
 .brand strong {
   font-size: 0.98rem;
+}
+
+.brand img {
+  border-radius: 10px;
 }
 
 nav {
@@ -534,6 +616,7 @@ nav a:focus-visible {
   font-size: 0.78rem;
   font-weight: 700;
   padding: 0.35rem 0.65rem;
+  margin-top: 10px;
 }
 
 h1,
@@ -541,7 +624,7 @@ h2,
 h3,
 h4,
 p {
-  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -572,6 +655,7 @@ h1 {
   color: var(--muted);
   font-size: 1.02rem;
   line-height: 1.8;
+  margin-bottom: 20px;
 }
 
 .hero-actions,
@@ -595,7 +679,10 @@ h1 {
   border-radius: 12px;
   padding: 0.75rem 1rem;
   font-weight: 800;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
 }
 
 .primary-action {
@@ -1278,7 +1365,9 @@ h1 {
   background: var(--surface);
   color: var(--text);
   padding: 0.85rem;
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
 }
 
 .certificate-card:hover {
@@ -1483,7 +1572,7 @@ h1 {
 
 .certificate-modal .certificate-download {
   width: 100%;
-  margin-top: auto;
+  margin-top: 20px;
   border-color: rgba(56, 223, 245, 0.55);
   background: linear-gradient(135deg, var(--cyan), var(--blue));
   color: #031019;
@@ -1584,10 +1673,12 @@ h1 {
 
 @keyframes splashTallOrbit {
   from {
-    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg) rotateZ(18deg);
+    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg)
+      rotateZ(18deg);
   }
   to {
-    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg) rotateZ(378deg);
+    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg)
+      rotateZ(378deg);
   }
 }
 
@@ -1601,7 +1692,8 @@ h1 {
   }
   30% {
     opacity: 0.92;
-    transform: translate3d(var(--approach-x), var(--approach-y), 95px) scale(0.92);
+    transform: translate3d(var(--approach-x), var(--approach-y), 95px)
+      scale(0.92);
   }
   48% {
     opacity: 1;
@@ -1724,10 +1816,6 @@ h1 {
 }
 
 @media (max-width: 900px) {
-  .brand strong {
-    display: none;
-  }
-
   .site-header {
     gap: 0.55rem;
   }
@@ -2010,7 +2098,8 @@ h1 {
 
   .splash-wire-orbit-tall {
     opacity: 0.12;
-    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg) rotateZ(18deg);
+    transform: translate(-50%, -50%) rotateX(12deg) rotateY(62deg)
+      rotateZ(18deg);
   }
 
   .splash-cube-orbiter {
